@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Model Jury — one question, every model</title>
+<meta name="description" content="Ask one yes/no question and let several AI models vote, explain, and disagree. Powered by Pollinations.">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<header class="hero">
+  <h1>⚖️ Model Jury</h1>
+  <p class="tagline">One question. Every model. A verdict you can argue with.</p>
+  <p class="sub">Several AI models answer the same question independently, then the jury tally shows
+  where they agree — and the dissent tells you what they don't.</p>
+</header>
+
+<main>
+  <section class="panel">
+    <label for="question">Your question</label>
+    <textarea id="question" rows="2" maxlength="500">Is remote work better than working from an office?</textarea>
+
+    <div class="row">
+      <div class="grow">
+        <label>Jury <span id="pickCount" class="muted"></span></label>
+        <div id="models" class="chips"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="grow">
+        <label for="key">Your Pollinations key <span class="muted">(stored only in this browser)</span></label>
+        <input id="key" type="password" placeholder="sk_..." autocomplete="off">
+      </div>
+      <button id="ask" class="primary">Convene the jury</button>
+    </div>
+    <p class="muted small">Get a key at <a href="https://enter.pollinations.ai/keys">enter.pollinations.ai/keys</a>.
+    No key is embedded in this app — each visitor pays with their own Pollen.</p>
+  </section>
+
+  <section id="result" class="result" hidden>
+    <div class="tally">
+      <div class="bar" id="bar"></div>
+      <div class="score" id="score"></div>
+    </div>
+    <p id="consensus" class="consensus"></p>
+    <div id="cards" class="cards"></div>
+  </section>
+
+  <section id="error" class="error" hidden></section>
+
+  <section class="panel how">
+    <h2>How it calls Pollinations</h2>
+    <p>Each juror is one independent request to
+    <code>POST https://gen.pollinations.ai/v1/chat/completions</code>, sent in parallel with the
+    visitor's own key and a model id chosen from
+    <code>GET https://gen.pollinations.ai/v1/models</code>. The answers are parsed into a
+    structured verdict; nothing is generated locally. See
+    <a href="./app.js">app.js</a>.</p>
+    <p>Made with <a href="https://pollinations.ai/?ref=badge">pollinations.ai</a>.</p>
+  </section>
+</main>
+
+<script src="./app.js"></script>
+</body>
+</html>
