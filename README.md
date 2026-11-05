@@ -7,7 +7,7 @@ MiniMax — answer it **independently**, in parallel. The app turns their answer
 who said YES, who said NO, who abstained, and the one-sentence reason each juror gave. The
 dissent is the interesting part.
 
-Made with [pollinations.ai](https://pollinations.ai/?ref=badge).
+[![Made with pollinations.ai](https://raw.githubusercontent.com/pollinations/pollinations/main/packages/ui/src/brand/badge-made-with.svg)](https://pollinations.ai/?ref=badge)
 
 ![Model Jury in action](https://raw.githubusercontent.com/SvirepyiBambr/model-jury/main/screenshot.png)
 
