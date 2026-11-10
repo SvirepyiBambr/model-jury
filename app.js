@@ -18,13 +18,14 @@ const SYSTEM = 'You are a juror in a public debate. Commit to a side: answer YES
     + 'Reply with STRICT JSON only, no markdown: {"verdict":"YES"|"NO"|"UNCLEAR","reason":"one concrete sentence, max 25 words"}.';
 
 const $ = (id) => document.getElementById(id);
-const keyEl = $("key");
+const connectEl = document.querySelector("polli-connect");
 const questionEl = $("question");
 const modelsEl = $("models");
 const askBtn = $("ask");
 
-keyEl.value = localStorage.getItem("polli_key") || "";
-keyEl.addEventListener("change", () => localStorage.setItem("polli_key", keyEl.value.trim()));
+// The Connect web component keeps the scoped sk_ key in sessionStorage and
+// exposes it as `apiKey`; this page never asks for a pasted key or stores one.
+// Read it at click time: the element upgrades after connect.js loads.
 
 function renderChips() {
     modelsEl.innerHTML = "";
@@ -125,14 +126,13 @@ function renderVerdicts(rows) {
 
 async function run() {
     const question = questionEl.value.trim();
-    const key = keyEl.value.trim();
+    const key = connectEl?.apiKey || null;
     const models = picked();
     $("error").hidden = true;
     if (!question) return showError("Type a question first.");
-    if (!key) return showError("Paste your Pollinations key (sk_...) — the jury calls the API with your own key.");
+    if (!key) return showError("Connect your Pollen first — the jury calls the API with your own key.");
     if (!models.length) return showError("Pick at least one model.");
 
-    localStorage.setItem("polli_key", key);
     askBtn.disabled = true;
     askBtn.innerHTML = '<span class="spin"></span>Deliberating…';
     $("result").hidden = true;

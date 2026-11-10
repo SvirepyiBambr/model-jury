@@ -29,13 +29,14 @@
 
     <div class="row">
       <div class="grow">
-        <label for="key">Your Pollinations key <span class="muted">(stored only in this browser)</span></label>
-        <input id="key" type="password" placeholder="sk_..." autocomplete="off">
+        <label>Your Pollen <span class="muted">(Connect approves a scoped key with a budget and an expiry)</span></label>
+        <polli-connect app-key="pk_j87YS2xiNdKaB2lW" budget="5" expiry="7"></polli-connect>
       </div>
       <button id="ask" class="primary">Convene the jury</button>
     </div>
-    <p class="muted small">Get a key at <a href="https://enter.pollinations.ai/keys">enter.pollinations.ai/keys</a>.
-    No key is embedded in this app — each visitor pays with their own Pollen.</p>
+    <p class="muted small">Connect sends you to Pollinations to approve a key capped at 5 Pollen for 7 days; it stays in this tab.
+    No key is embedded in this app — each visitor pays with their own Pollen.
+    <a href="https://enter.pollinations.ai/keys">Manage keys</a>.</p>
   </section>
 
   <section id="result" class="result" hidden>
@@ -61,6 +62,7 @@
   </section>
 </main>
 
+<script defer src="https://cdn.jsdelivr.net/npm/@pollinations/ui@0.1.0-alpha.20/dist/connect.js"></script>
 <script src="./app.js"></script>
 </body>
 </html>

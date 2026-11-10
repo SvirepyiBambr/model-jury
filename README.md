@@ -28,9 +28,12 @@ Static page on GitHub Pages. No backend, no embedded secrets.
 3. Answers are parsed tolerantly (JSON, fenced JSON, or plain text), then the tally bar,
    consensus line, per-juror latency and dissent cards are rendered client-side.
 
-Bring your own Pollen: paste an `sk_...` key from
-[enter.pollinations.ai/keys](https://enter.pollinations.ai/keys). The key is stored only in
-`localStorage` in your browser and sent only to `gen.pollinations.ai`.
+Bring your own Pollen: **Connect** opens the Pollinations consent screen, where you approve a
+scoped `sk_...` key with a budget (5 Pollen) and an expiry (7 days). The app never asks for a
+pasted key and never stores one itself — the
+[`@pollinations/ui` Connect component](https://github.com/pollinations/pollinations/blob/main/BRING_YOUR_OWN_POLLEN.md)
+keeps it in `sessionStorage` for the tab, and it is sent only to `gen.pollinations.ai`.
+Review or revoke it at [enter.pollinations.ai/keys](https://enter.pollinations.ai/keys).
 
 ## Fairness notes
 
@@ -49,6 +52,8 @@ No build step, no dependencies.
 
 ## Verification
 
+- Connect flow: the consent screen opens with this app's publishable key and the GitHub Pages
+  redirect URI; the approved key is spent by the app and capped at 5 Pollen.
 - Live run with a real key: 5 jurors answered, tally 3 NO / 2 YES, all reasons rendered.
 - Partial failures are surfaced per model without killing the rest of the jury.
 - Empty key, empty question and empty jury are rejected with inline errors.
